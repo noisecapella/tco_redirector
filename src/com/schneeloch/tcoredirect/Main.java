@@ -39,67 +39,14 @@ public class Main extends Activity {
 		
 		Intent intent = getIntent();
 		handleIntent(intent);
-		
-		finish();
 	}
 
 	private void handleIntent(Intent intent) {
 		if (intent != null && intent.getAction().equals(Intent.ACTION_VIEW))
 		{
 			Uri oldUri = getIntent().getData();
-			ProgressDialog progressDialog = new ProgressDialog(this);
-			progressDialog.setMessage("Opening " + oldUri.toString());
-			try {
-				final URI uri = new URI(oldUri.getScheme(), oldUri.getUserInfo(), oldUri.getHost(), 
-						oldUri.getPort(), oldUri.getPath(), oldUri.getQuery(), oldUri.getFragment());
-
-				HttpHead head = new HttpHead(uri);
-				DefaultHttpClient httpClient = new DefaultHttpClient();
-				httpClient.setRedirectHandler(new RedirectHandler() {
-
-					@Override
-					public boolean isRedirectRequested(HttpResponse response,
-							HttpContext context) {
-						Header header = response.getFirstHeader("Location");
-						if (header != null)
-						{
-							String newUrl = header.getValue();
-
-							Intent newIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(newUrl));
-							startActivity(newIntent);
-						}
-						else
-						{
-							Toast.makeText(Main.this, "Invalid t.co link: " + uri.toString(), Toast.LENGTH_LONG).show();
-						}
-						return false;
-					}
-
-					@Override
-					public URI getLocationURI(HttpResponse response, HttpContext context)
-					throws ProtocolException {
-						return null;
-					}
-				});
-				
-				progressDialog.show();
-				httpClient.execute(head);
-			}
-			catch (ClientProtocolException e) {
-				report("Problem reading t.co link", e);
-			} catch (IOException e) {
-				report("Problem reading input", e);
-			} catch (URISyntaxException e) {
-				report("Problem parsing uri", e);
-			}
-			catch (Throwable t)
-			{
-				report("Unknown problem", t);
-			}
-			finally
-			{
-				progressDialog.dismiss();
-			}
+			ForwardAsyncTask forwardAsyncTask = new ForwardAsyncTask(this, oldUri);
+			forwardAsyncTask.execute();
 		}
 		else
 		{
