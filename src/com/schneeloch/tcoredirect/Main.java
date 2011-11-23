@@ -22,6 +22,7 @@ import org.apache.http.protocol.HttpContext;
 
 import com.schneeloch.tcoredirect.R;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
@@ -46,6 +47,8 @@ public class Main extends Activity {
 		if (intent != null && intent.getAction().equals(Intent.ACTION_VIEW))
 		{
 			Uri oldUri = getIntent().getData();
+			ProgressDialog progressDialog = new ProgressDialog(this);
+			progressDialog.setMessage("Opening " + oldUri.toString());
 			try {
 				final URI uri = new URI(oldUri.getScheme(), oldUri.getUserInfo(), oldUri.getHost(), 
 						oldUri.getPort(), oldUri.getPath(), oldUri.getQuery(), oldUri.getFragment());
@@ -78,8 +81,9 @@ public class Main extends Activity {
 						return null;
 					}
 				});
+				
+				progressDialog.show();
 				httpClient.execute(head);
-
 			}
 			catch (ClientProtocolException e) {
 				report("Problem reading t.co link", e);
@@ -91,6 +95,10 @@ public class Main extends Activity {
 			catch (Throwable t)
 			{
 				report("Unknown problem", t);
+			}
+			finally
+			{
+				progressDialog.dismiss();
 			}
 		}
 		else
