@@ -4,3 +4,5 @@ gen/*
 *.properties
 tools/route*
 
+/bin
+/gen
