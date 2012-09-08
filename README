@@ -1,1 +1,6 @@
-This README is empty for now
+This is a fork of the original t.co Redirector app repository on GitHub.
+
+I added the possibility to hook into https://t.co URLs, too. The original app supports http://t.co URLs only.
+Smaller changes: Cleaned up the import statements and added a German translation.
+
+Have fun!

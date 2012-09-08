@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, Main!</string>
     <string name="app_name">T.co_Redirect</string>
-
+    <string name="opening">Opening</string>
+    
+    <string name="err_reading_url">Problem reading url</string>
+    <string name="err_reading_tco">Problem reading t.co link</string>
+    <string name="err_reading_input">Problem reading input</string>
+    <string name="err_parsing_uri">Problem parsing uri</string>
+    <string name="err_unknown">Unknown problem</string>
 </resources>
