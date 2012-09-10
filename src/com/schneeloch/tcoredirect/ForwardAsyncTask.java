@@ -14,7 +14,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -38,7 +37,7 @@ public class ForwardAsyncTask extends AsyncTask<Object, Integer, Object>
 	@Override
 	protected void onPreExecute() {
 		progressDialog = new ProgressDialog(context);
-		progressDialog.setMessage("Opening " + oldUri);
+		progressDialog.setMessage(context.getResources().getString(R.string.opening) + " " + oldUri);
 		progressDialog.show();
 	}
 	
@@ -84,15 +83,15 @@ public class ForwardAsyncTask extends AsyncTask<Object, Integer, Object>
 			httpClient.execute(head);
 		}
 		catch (ClientProtocolException e) {
-			report("Problem reading t.co link", e);
+			report(context.getResources().getString(R.string.err_reading_tco), e);
 		} catch (IOException e) {
-			report("Problem reading input", e);
+			report(context.getResources().getString(R.string.err_reading_input), e);
 		} catch (URISyntaxException e) {
-			report("Problem parsing uri", e);
+			report(context.getResources().getString(R.string.err_parsing_uri), e);
 		}
 		catch (Throwable t)
 		{
-			report("Unknown problem", t);
+			report(context.getResources().getString(R.string.err_unknown), t);
 		}
 		
 		return null;

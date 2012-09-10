@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">T.co_Redirect</string>
+    <string name="opening">Öffne</string>
+    
+    <string name="err_reading_url">Problem beim lesen der URL</string>
+    <string name="err_reading_tco">Problem beim Lesen des t.co Links</string>
+    <string name="err_reading_input">Problem beim Lesen der t.co Rückgabe</string>
+    <string name="err_parsing_uri">Problem beim Parsen der URI</string>
+    <string name="err_unknown">Unbekanntes Problem</string>
+</resources>
