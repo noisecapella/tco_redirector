@@ -1,6 +1,3 @@
-This is a fork of the original t.co Redirector app repository on GitHub.
+This is a simple redirector app for Android, for the Twitter shortlink URLs starting with http://t.co and https://t.co. It attaches to any application which opens links to those addresses, does a HEAD request for what the shortlink is pointing to, then launches a new Intent toward that site.
 
-I added the possibility to hook into https://t.co URLs, too. The original app supports http://t.co URLs only.
-Smaller changes: Cleaned up the import statements and added a German translation.
-
-Have fun!
+I wrote this mainly to work around a problem on my Android tablet with my Twitter app where Youtube videos were being opened in the browser instead of in the Youtube app. YMMV. Pull requests appreciated!
